@@ -2,7 +2,7 @@ var Match3 = Match3 || {};
 
 Match3.BootState = {
     init: function(){
-        this.game.stage.backgroundColor = '#fff';
+        this.game.stage.backgroundColor = '#999';
 
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 

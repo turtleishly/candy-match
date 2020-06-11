@@ -2,7 +2,7 @@ var Match3 = Match3 || {};
 
 Match3.PreloadState = {
     Preload : function(){
-        this.preloadBar = this.add.Sprite(this.game.world.centerX,this.game.world.centerY);
+        this.preloadBar = this.add.Sprite(this.game.world.centerX,this.game.world.centerY,'bar');
         this.preloadBar.anchor.setTo(0.5);
         this.preload.Bar.scale.setTo(100,1);
         this.load.setPreloadSprite(this.preloadBar);
@@ -20,6 +20,6 @@ Match3.PreloadState = {
 
     },
     create: function(){
-       // this.game.start('Game');
+        this.state.start('Game');
     }
 }
