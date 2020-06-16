@@ -16,13 +16,12 @@ Match3.Board = function(state,rows,cols,blockVariations){
             this.grid[i].push(0);
             
         }
-
     };
    
 
     this.reserveGrid = [];
 
-    this.RESERVE_ROW = 5;
+    this.RESERVE_ROW = 8;
 
     for(i = 0;i < this.RESERVE_ROW; i++){
         this.reserveGrid.push([]);
@@ -144,7 +143,7 @@ return isChained;
 Match3.Board.prototype.findAllChains = function(){
   var i, j ;
   var chained = [];
-  for(i = 0;i < this.rows; i++){
+  for(i = 0 ;i < this.rows; i++){
     for(j = 0;j < this.cols; j++){
       if (this.isChained({row : i , col : j})){
         chained.push({row : i , col : j });
@@ -171,3 +170,33 @@ Match3.Board.prototype.dropReserveBlock = function(sourceRow,targetRow,col){
   this.grid[targetRow][col] = this.reserveGrid[sourceRow][col]
   this.reserveGrid[sourceRow][col] = 0;
   }
+
+ Match3.Board.prototype.updateGrid = function(){
+   var i , j , k ,foundBlock;
+   for (i =this.rows -1 ;i >= 0; i --){
+     for (j = 0 ; j < this.cols ; j++){
+       if (this.grid[i][j] === 0){
+         foundBlock = false;
+
+         for ( k = i -1 ; k >=0 ; k --){
+           if (this.grid[k][j] > 0){
+             this.dropBlock(k,i,j);
+             foundBlock = true;
+             break;
+           }
+
+         }
+
+         if (!foundBlock){
+          for ( k = this.RESERVE_ROW -1 ; k >=0 ; k --){
+            if (this.reserveGrid[k][j] > 0){
+              this.dropReserveBlock(k,i,j);
+              break;
+            }
+          }
+         }
+       }
+     }
+   }
+   this.populateReserveGrid();
+ } 
