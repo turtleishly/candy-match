@@ -140,3 +140,34 @@ if(this.grid[row+1]&& this.grid [ row -1]){
 
 return isChained;
 }
+
+Match3.Board.prototype.findAllChains = function(){
+  var i, j ;
+  var chained = [];
+  for(i = 0;i < this.rows; i++){
+    for(j = 0;j < this.cols; j++){
+      if (this.isChained({row : i , col : j})){
+        chained.push({row : i , col : j });
+      }
+    }
+  }
+return chained;
+}
+Match3.Board.prototype.clearAllChains = function(){
+  var chainedBlocks = this.findAllChains()
+
+  chainedBlocks.forEach(function(block){
+    this.grid [block.row][block.col] = 0
+
+  },this);
+}
+
+Match3.Board.prototype.dropBlock = function(sourceRow,targetRow,col){
+this.grid[targetRow][col] = this.grid[sourceRow][col]
+this.grid[sourceRow][col] = 0;
+}
+
+Match3.Board.prototype.dropReserveBlock = function(sourceRow,targetRow,col){
+  this.grid[targetRow][col] = this.reserveGrid[sourceRow][col]
+  this.reserveGrid[sourceRow][col] = 0;
+  }
