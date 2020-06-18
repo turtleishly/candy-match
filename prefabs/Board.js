@@ -158,6 +158,8 @@ Match3.Board.prototype.clearAllChains = function(){
   chainedBlocks.forEach(function(block){
     this.grid [block.row][block.col] = 0
 
+    this.state.getBlockFromColRow(block).kill();
+
   },this);
 }
 
