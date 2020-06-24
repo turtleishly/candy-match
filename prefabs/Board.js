@@ -152,11 +152,11 @@ Match3.Board.prototype.findAllChains = function(){
   }
 return chained;
 }
-Match3.Board.prototype.clearAllChains = function(){
-  var chainedBlocks = this.findAllChains()
+Match3.Board.prototype.clearChains = function(){
+  var chainedBlocks = this.findAllChains();
 
   chainedBlocks.forEach(function(block){
-    this.grid [block.row][block.col] = 0
+    this.grid [block.row][block.col] = 0 ;
 
     this.state.getBlockFromColRow(block).kill();
 

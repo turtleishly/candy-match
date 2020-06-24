@@ -5,6 +5,8 @@ Match3.Block = function(state, x, y, data) {
 
   this.game = state.game;
   this.state = state;
+  this.row = data.row;
+  this.data = data.col;
 
   this.anchor.setTo(0.5);
 
